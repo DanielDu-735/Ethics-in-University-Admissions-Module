@@ -11,8 +11,9 @@ struct Applicant {
     bool first_gen;       // first generation college student
     int essay_score;      // 1 - 10
     std::string demographic; // for tracking
+    std::string gender; // Male, Female, Non-binary
     
-    Applicant(std::string n, double g, int sat, double income, bool fg, int essay, std::string demo);
+    Applicant(std::string n, double g, int sat, double income, bool fg, int essay, std::string demo, std::string gen);
     
     void display() const;
 };

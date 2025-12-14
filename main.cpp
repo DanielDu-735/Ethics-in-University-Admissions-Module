@@ -1,7 +1,8 @@
 #include "StudentApplicant.h"
 #include "Comparators.h"
 int main() {
-    std::vector<Applicant> applicants = create_sample_pool();
+    std::vector<Applicant> applicants = create_sample_pool_male();
+    std::vector<Applicant> big_applicants = create_sample_pool_big();
     int admission_slots = 5;
     
     std::cout << "=== AI-Based University Admissions Simulation ===\n";
@@ -20,6 +21,20 @@ int main() {
     process_admissions(applicants, 
                       CustomComparator(200.0, 0.2, 50.0, 150.0, 100.0, 50000.0), 
                       admission_slots, "Custom Weighted");
+    
+    // Larger applicant pool
+    std::cout << "\n=== Testing with Larger Applicant Pool ===\n";
+    admission_slots = 10;
+    std::cout << "Total applicants: " << big_applicants.size() << "\n";
+    std::cout << "Available slots: " << admission_slots << "\n";
+    process_admissions(big_applicants, AcademicOnlyComparator(), 
+                      admission_slots, "Academic Only - Large Pool");
+    process_admissions(big_applicants, 
+                      HolisticComparator(150.0, 0.3, 50.0, 100.0, 80.0, 50000.0, 40.0, 100000.0), 
+                      admission_slots, "Holistic Review - Large Pool");
+    process_admissions(big_applicants, 
+                      CustomComparator(200.0, 0.2, 50.0, 150.0, 100.0, 50000.0, 50.0, 60.0), 
+                      admission_slots, "Custom Weighted - Large Pool");
     
     std::cout << "\n=== Questions to Consider ===\n";
     std::cout << "1. Which method seems most fair? Why?\n";
